@@ -20,16 +20,14 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     try {
-      MoPub.init('ad_unit_id', testMode: true).then((_) {
-        _loadRewardedAd();
+      MoPub.init('ad_unit_id', testMode: false).then((_) {
         _loadInterstitialAd();
       });
     } on PlatformException {}
   }
 
   void _loadRewardedAd() {
-    videoAd = MoPubRewardedVideoAd('ad_unit_id',
-        (result, args) {
+    videoAd = MoPubRewardedVideoAd('ad_unit_id', (result, args) {
       setState(() {
         rewardedResult = '${result.toString()}____$args';
       });
@@ -47,7 +45,7 @@ class _MyAppState extends State<MyApp> {
         print('Interstitial $result');
       },
       reloadOnClosed: true,
-    );    
+    );
   }
 
   @override
